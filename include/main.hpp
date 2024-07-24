@@ -4,4 +4,11 @@
 
 #pragma once
 
+
+#include <memory>
+
+#include <commands/init.hpp>
+
+std::shared_ptr<Init> initCommand;
+
 int main(int, char**);

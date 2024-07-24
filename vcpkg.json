@@ -3,10 +3,13 @@
   "version-string" : "1.0.0",
   "builtin-baseline" : "576379156e82da642f8d1834220876759f13534d",
   "dependencies" : [ {
-    "name" : "ncurses",
-    "version>=" : "6.4#2"
-  }, {
     "name" : "cli11",
     "version>=" : "2.4.2"
+  }, {
+    "name" : "pkgconf",
+    "version>=" : "2.2.0"
+  }, {
+    "name" : "ftxui",
+    "version>=" : "5.0.0"
   } ]
 }
