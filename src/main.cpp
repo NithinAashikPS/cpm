@@ -6,7 +6,6 @@
 #include <main.hpp>
 #include <core/application.hpp>
 
-
 #include <CLI/CLI.hpp>
 
 // #include <ftxui/component/component.hpp> // for Component

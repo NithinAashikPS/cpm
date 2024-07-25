@@ -14,5 +14,9 @@ public:
     explicit Init(CLI::App&);
     void execute() override;
 private:
+    std::string name;
+
     std::string projectName;
+    std::string projectDescription;
+    std::string projectVersion = "v0.1";
 };
