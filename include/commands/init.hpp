@@ -7,6 +7,9 @@
 #include <commands/command.hpp>
 
 #include <CLI/CLI.hpp>
+#include <nlohmann/json.hpp>
+
+using Json = nlohmann::ordered_json;
 
 class Init final : public Command
 {
@@ -14,6 +17,8 @@ public:
     explicit Init(CLI::App&);
     void execute() override;
 private:
+    Json getProjectDetails(const std::string&);
+
     std::string name;
 
     std::string projectName;

@@ -16,6 +16,7 @@ set(
         ${INCLUDE_DIR}/core/application.hpp
 
         ${INCLUDE_DIR}/utils/file.hpp
+        ${INCLUDE_DIR}/utils/console.hpp
 )
 
 set(
@@ -27,6 +28,7 @@ set(
         ${CMAKE_SOURCE_DIR}/src/core/application.cpp
 
         ${CMAKE_SOURCE_DIR}/src/utils/file.cpp
+        ${CMAKE_SOURCE_DIR}/src/utils/console.cpp
 )
 
 add_executable(${PROJECT_NAME} ${PROJECT_HEADERS} ${PROJECT_SOURCES})

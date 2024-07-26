@@ -6,8 +6,7 @@
 
 #include <commands/init.hpp>
 #include <utils/file.hpp>
-
-#include <CLI/CLI.hpp>
+#include <utils/console.hpp>
 
 Init::Init(CLI::App& cli)
 {
@@ -21,21 +20,35 @@ void Init::execute()
     name = name.empty() ? File::currentDir() : File::currentDir() + SEPERATOR + name;
     if (File::exists(name) && name != File::currentDir())
     {
-        std::cout << "Project already exists." << std::endl;
+        Console::error("Project already exists.");
         return;
     }
-    File::createDir(name);
-    if (!File::isEmpty(name))
+    if (!File::exists(name))
     {
-        std::cout << "Directory should not contain any file/folder in it." << std::endl;
+        const Json projectDetails = getProjectDetails(name);
+        File::createDir(name);
+        File::write(name + "/cpm.json", projectDetails.dump(4));
+        File::createDirH(name + "/.cpm");
         return;
     }
+    if (!File::isEmpty(name))
+        Console::error("Directory should not contain any file/folder in it.");
+}
 
+Json Init::getProjectDetails(const std::string& name)
+{
     projectName = File::currentFolder(name);
-    std::cout << "Project Name : " << projectName << std::endl;
-    std::cout << "Project Description : ";
-    std::getline(std::cin, projectDescription);
-    std::cout << "Project Version (v0.1) : ";
-    std::getline(std::cin, projectVersion);
-    // std::cout << "Is Empty : " << File::isEmpty(name) << std::endl;
+    std::string tempVersion;
+
+    Console::print("Project Name : " + projectName);
+    Console::readString("Project Description : ", projectDescription);
+    Console::readString("Project Version (default: v0.1) : ", tempVersion);
+
+    if (!tempVersion.empty()) {  projectVersion = tempVersion; }
+
+    Json projectDetails;
+    projectDetails["name"] = projectName;
+    projectDetails["description"] = projectDescription;
+    projectDetails["version"] = projectVersion;
+    return projectDetails;
 }

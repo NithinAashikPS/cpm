@@ -2,10 +2,15 @@
 // Created by Aashik on 24-07-2024.
 //
 
-#include <iostream>
+#ifdef _WIN32
+#include <windows.h>
+#endif
 #include <filesystem>
+#include <fstream>
+#include <cstring>
 
 #include <utils/file.hpp>
+#include <utils/console.hpp>
 
 std::string File::currentDir()
 {
@@ -38,5 +43,29 @@ bool File::exists(const std::string& path)
 
 void File::createDir(const std::string& path)
 {
-    fs::create_directory(path);
+    fs::create_directories(path);
+}
+
+void File::createDirH(const std::string& path)
+{
+#ifdef _WIN32
+    if (!CreateDirectory(path.c_str(), nullptr))
+        Console::error("Error: " + GetLastError());
+
+    if (!SetFileAttributes(path.c_str(), FILE_ATTRIBUTE_HIDDEN))
+        Console::error("Error: " + GetLastError());
+#else
+    if (mkdir(path.c_str(), 0755) == -1)
+        Console::error("Error: " + std::string(strerror(errno)));
+#endif
+}
+
+void File::write(const std::string& path, const std::string& data)
+{
+    if (std::ofstream outFile(path); outFile.is_open()) {
+        outFile << data;
+        outFile.close();
+    } else {
+        Console::error("Unable to open file : " + path);
+    }
 }

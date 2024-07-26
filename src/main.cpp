@@ -8,16 +8,13 @@
 
 #include <CLI/CLI.hpp>
 
-// #include <ftxui/component/component.hpp> // for Component
-// #include <ftxui/component/screen_interactive.hpp> // for ScreenInteractive
-// #include <ftxui/dom/elements.hpp>
-//     using namespace ftxui;
+#include "utils/console.hpp"
 
 int main(const int argc, char** argv)
 {
-
+    Console::clear();
     if (argc < 2) {
-        std::cerr << "Usage: " << argv[0] << " <command>" << std::endl;
+        Console::error("Usage: " + std::string(argv[0]) + " <command>" );
         return 1;
     }
 
@@ -31,12 +28,6 @@ int main(const int argc, char** argv)
     CLI11_PARSE(cli, argc, argv);
 
     cpm.runCommand(argv[1]);
-
-    // auto screen = Screen::Create(
-    //     Dimension::Full(), Dimension::Full()
-    // );
-    // Render(screen, text("Hello"));
-    // screen.Print();
 
     return 0;
 }

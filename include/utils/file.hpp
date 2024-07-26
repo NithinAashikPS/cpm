@@ -23,4 +23,6 @@ public:
     static bool isEmpty(const std::string&);
     static bool exists(const std::string&);
     static void createDir(const std::string&);
+    static void createDirH(const std::string&);
+    static void write(const std::string&, const std::string&);
 };

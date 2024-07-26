@@ -9,7 +9,7 @@
     "name" : "pkgconf",
     "version>=" : "2.2.0"
   }, {
-    "name" : "ftxui",
-    "version>=" : "5.0.0"
+    "name" : "nlohmann-json",
+    "version>=" : "3.11.3#1"
   } ]
 }
