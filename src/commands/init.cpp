@@ -2,8 +2,6 @@
 // Created by Aashik on 24-07-2024.
 //
 
-#include <iostream>
-
 #include <commands/init.hpp>
 #include <utils/file.hpp>
 #include <utils/console.hpp>
@@ -16,12 +14,10 @@ Init::Init(CLI::App& cli)
 
 void Init::execute()
 {
-
     name = name.empty() ? File::currentDir() : File::currentDir() + SEPERATOR + name;
     if (File::exists(name) && name != File::currentDir())
     {
-        Console::error("Project already exists.");
-        return;
+        Console::error("Project already exists."); return;
     }
     if (!File::exists(name))
     {

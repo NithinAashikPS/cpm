@@ -63,8 +63,7 @@ void File::createDirH(const std::string& path)
 void File::write(const std::string& path, const std::string& data)
 {
     if (std::ofstream outFile(path); outFile.is_open()) {
-        outFile << data;
-        outFile.close();
+        outFile << data; outFile.close();
     } else {
         Console::error("Unable to open file : " + path);
     }

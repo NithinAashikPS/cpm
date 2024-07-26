@@ -1,0 +1,40 @@
+message("Windows Packaging Setup.")
+
+
+include(InstallRequiredSystemLibraries)
+
+
+set(CPACK_GENERATOR "NSIS")
+
+set(CPACK_PACKAGE_NAME ${PROJECT_NAME})
+set(CPACK_PACKAGE_VERSION ${PROJECT_VERSION})
+set(CPACK_PACKAGE_VENDOR "MyCompany")
+set(CPACK_PACKAGE_INSTALL_REGISTRY_KEY ${PROJECT_NAME})
+set(CPACK_IGNORE_FILES "\\.psd$;/CVS/;/\\.svn/;/\\.git/;\\.swp$;/CMakeLists.txt.user;\\.#;/#;\\.tar.gz$;/CMakeFiles/;CMakeCache.txt;\\.qm$;/build/;\\.diff$;.DS_Store'")
+set(CPACK_SOURCE_GENERATOR "TGZ")
+set(CPACK_SOURCE_PACKAGE_FILE_NAME "${CPACK_PACKAGE_NAME}-${CPACK_PACKAGE_VERSION}")
+set(CPACK_SOURCE_IGNORE_FILES ${CPACK_IGNORE_FILES})
+
+set(CPACK_NSIS_DISPLAY_NAME ${PROJECT_NAME})
+set(CPACK_NSIS_PACKAGE_NAME ${PROJECT_NAME})
+#set(CPACK_NSIS_INSTALLED_ICON_NAME "${APP_LOW_NAME}.ico")
+#set(CPACK_NSIS_HELP_LINK ${APP_URL})
+#set(CPACK_NSIS_URL_INFO_ABOUT ${APP_URL})
+#set(CPACK_NSIS_CONTACT ${APP_EMAIL})
+
+set(WIN_INSTALL_SOURCE ${CMAKE_SOURCE_DIR}/resources/nsis)
+set(LICENSE_FILE ${CMAKE_SOURCE_DIR}/LICENSE)
+set(LICENSE_FILE_OUT ${CMAKE_BINARY_DIR}/license.txt)
+configure_file(${LICENSE_FILE} ${LICENSE_FILE_OUT})
+set(CPACK_RESOURCE_FILE_LICENSE ${LICENSE_FILE_OUT})
+
+if (CMAKE_CL_64)
+    set(CPACK_NSIS_INSTALL_ROOT "$PROGRAMFILES64")
+else (CMAKE_CL_64)
+    set(CPACK_NSIS_INSTALL_ROOT "$PROGRAMFILES")
+endif (CMAKE_CL_64)
+
+configure_file(
+        ${CMAKE_SOURCE_DIR}/resources/nsis/NSIS.definitions.nsh.in
+        ${CMAKE_BINARY_DIR}/resources/nsis/NSIS.definitions.nsh
+)
