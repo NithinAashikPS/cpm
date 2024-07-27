@@ -8,16 +8,8 @@
 
 #include <CLI/CLI.hpp>
 
-#include "utils/console.hpp"
-
 int main(const int argc, char** argv)
 {
-    Console::clear();
-    if (argc < 2) {
-        Console::error("Usage: " + std::string(argv[0]) + " <command>" );
-        return 1;
-    }
-
     Application cpm;
     CLI::App cli{"App description"};
     argv = cli.ensure_utf8(argv);
@@ -25,6 +17,11 @@ int main(const int argc, char** argv)
     initCommand = std::make_shared<Init>(cli);
     cpm.registerCommand("init", initCommand);
 
+    if (argc < 2) {
+        char* a[] = {argv[0], static_cast<char*>("--help")};
+        CLI11_PARSE(cli, 2, a);
+        return 1;
+    }
     CLI11_PARSE(cli, argc, argv);
 
     cpm.runCommand(argv[1]);
