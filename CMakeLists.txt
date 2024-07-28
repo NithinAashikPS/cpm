@@ -21,8 +21,19 @@ set(
         ${INCLUDE_DIR}/commands/command.hpp
         ${INCLUDE_DIR}/commands/init.hpp
 
-        ${INCLUDE_DIR}/core/vcpkg.hpp
         ${INCLUDE_DIR}/core/application.hpp
+
+        ${INCLUDE_DIR}/core/vcpkg/vcpkg.hpp
+
+        ${INCLUDE_DIR}/core/service/service.hpp
+        ${INCLUDE_DIR}/core/service/vcpkg.hpp
+
+        ${INCLUDE_DIR}/core/impl/vcpkg.hpp
+
+        ${INCLUDE_DIR}/core/actor/actor.hpp
+        ${INCLUDE_DIR}/core/actor/async_actor.hpp
+        ${INCLUDE_DIR}/core/actor/message.hpp
+        ${INCLUDE_DIR}/core/actor/message_interface.hpp
 
         ${INCLUDE_DIR}/utils/file.hpp
         ${INCLUDE_DIR}/utils/console.hpp
@@ -34,8 +45,11 @@ set(
 
         ${CMAKE_SOURCE_DIR}/src/commands/init.cpp
 
-        ${CMAKE_SOURCE_DIR}/src/core/vcpkg.cpp
         ${CMAKE_SOURCE_DIR}/src/core/application.cpp
+
+        ${CMAKE_SOURCE_DIR}/src/core/vcpkg/vcpkg.cpp
+
+        ${CMAKE_SOURCE_DIR}/src/core/service/vcpkg.cpp
 
         ${CMAKE_SOURCE_DIR}/src/utils/file.cpp
         ${CMAKE_SOURCE_DIR}/src/utils/console.cpp

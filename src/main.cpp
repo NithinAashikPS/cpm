@@ -8,10 +8,14 @@
 
 #include <CLI/CLI.hpp>
 
+#include "utils/console.hpp"
+
 int main(const int argc, char** argv)
 {
+    // Console::clear();
+
     Application cpm;
-    CLI::App cli{"App description"};
+    CLI::App cli{""};
     argv = cli.ensure_utf8(argv);
 
     initCommand = std::make_shared<Init>(cli);

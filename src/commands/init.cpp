@@ -6,7 +6,9 @@
 #include <utils/file.hpp>
 #include <utils/console.hpp>
 
-Init::Init(CLI::App& cli)
+#include "core/vcpkg/vcpkg.hpp"
+
+Init::Init(CLI::App& cli) : vcpkg(std::make_unique<Vcpkg>())
 {
     const auto init = cli.add_subcommand("init", "Create/Initialize new `cpm` project.");
     init->add_option("-n,--name", name, "Project name.");
@@ -25,6 +27,15 @@ void Init::execute()
         File::createDir(name);
         File::write(name + "/cpm.json", projectDetails.dump(4));
         File::createDirH(name + "/.cpm");
+
+        const std::shared_ptr<VcpkgState> state = vcpkg->getState();
+
+        vcpkg->download();
+        Console::progress([&](std::string& prompt) -> bool
+        {
+            prompt = state->message;
+            return state->running;
+        });
         return;
     }
     if (!File::isEmpty(name))

@@ -4,6 +4,7 @@
 
 #pragma once
 
+#include <core/service/vcpkg.hpp>
 #include <commands/command.hpp>
 
 #include <CLI/CLI.hpp>
@@ -16,8 +17,11 @@ class Init final : public Command
 public:
     explicit Init(CLI::App&);
     void execute() override;
+
 private:
     Json getProjectDetails(const std::string&);
+
+    std::unique_ptr<Vcpkg> vcpkg;
 
     std::string name;
 
