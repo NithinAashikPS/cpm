@@ -12,7 +12,7 @@
 
 int main(const int argc, char** argv)
 {
-    // Console::clear();
+    Console::clear();
 
     Application cpm;
     CLI::App cli{""};
@@ -29,6 +29,7 @@ int main(const int argc, char** argv)
     CLI11_PARSE(cli, argc, argv);
 
     cpm.runCommand(argv[1]);
+    Console::printBlue("Done.");
 
     return 0;
 }

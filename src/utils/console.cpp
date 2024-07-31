@@ -20,11 +20,18 @@ void Console::progress(const Progress& _progressCb)
 
     std::cout << CLEAR_CURSOR << std::flush;
     std::string prompt;
+
     while (_progressCb(prompt)) {
-        std::cout << "\r" << DARK_BLUE << prompt << " " << BLUE << indicators[index] << RESET << std::flush;
+        std::cout << "\r" << CLEAR_LINE << DARK_BLUE << prompt << " " << BLUE << indicators[index] << RESET << std::flush;
         index = (index + 1) % 4;
         std::this_thread::sleep_for(std::chrono::milliseconds(150));
     }
+    std::cout << std::endl;
+}
+
+void Console::printBlue(const std::string& prompt)
+{
+    std::cout << BLUE << prompt << RESET << std::endl;
 }
 
 void Console::print(const std::string& prompt)

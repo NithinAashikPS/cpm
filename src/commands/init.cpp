@@ -36,6 +36,7 @@ void Init::execute()
             prompt = state->message;
             return state->running;
         });
+
         return;
     }
     if (!File::isEmpty(name))

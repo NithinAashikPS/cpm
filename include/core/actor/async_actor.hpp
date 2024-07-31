@@ -18,6 +18,9 @@ public:
             m_actor = std::make_shared<Actor<ActorType>>(std::forward<Args>(args)...);
         });
     }
+    ~AsyncActor() {
+        thread.join();
+    }
 
     std::shared_ptr<Actor<ActorType>> actor()
     {

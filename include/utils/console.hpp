@@ -24,6 +24,7 @@ class Console
 public:
     static void readString(const std::string&, std::string&);
     static void progress(const Progress&);
+    static void printBlue(const std::string&);
     static void print(const std::string&);
     static void error(const std::string&);
     static void clear();

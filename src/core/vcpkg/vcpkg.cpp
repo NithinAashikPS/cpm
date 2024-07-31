@@ -16,6 +16,7 @@ void VcpkgCore::download()
     state->message = "Downloading...";
     std::this_thread::sleep_for(std::chrono::milliseconds(1500));
     state->message = "Downloading Finished...";
+    std::this_thread::sleep_for(std::chrono::milliseconds(1500));
     state->running = false;
 }
 
